@@ -1,0 +1,101 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+
+    defaultConfig {
+        applicationId "hy.test.jetpackdemo"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation deps.kotlin.stdlib
+    implementation deps.app_compat
+    implementation deps.material
+    implementation deps.constraint_layout
+    implementation deps.core_ktx
+
+    implementation deps.lifecycle.runtime
+    implementation deps.lifecycle.viewmodel_ktx
+    implementation deps.lifecycle.livedata_ktx
+    implementation deps.activity.activity_ktx
+
+    implementation deps.navigation.fragment_ktx
+    implementation deps.navigation.runtime_ktx
+    implementation deps.fragment.runtime_ktx
+    implementation deps.okhttp_logging_interceptor
+    implementation deps.retrofit.gson
+    implementation deps.retrofit.adapter
+    implementation deps.agentWeb
+    implementation deps.rxlifecycle
+    implementation deps.permissions
+    implementation deps.eventbus
+    implementation deps.leakcanary
+    implementation deps.orhanobutlogger
+    implementation deps.smartrefreshheader
+    implementation deps.smartrefresh
+    implementation deps.multidex
+    implementation deps.rxbinding2
+    implementation deps.glide
+    implementation deps.materialmenu
+    // "androidx.fragment:fragment-testing" must be scoped to all sourcesets.
+    implementation(deps.fragment.testing)
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+
+
+    // Espresso and UI Testing
+    androidTestImplementation deps.atsl.ext_junit
+    androidTestImplementation deps.espresso.core
+    androidTestImplementation deps.espresso.contrib
+    androidTestImplementation deps.espresso.intents
+    androidTestImplementation deps.navigation.testing
+    androidTestImplementation deps.truth
+
+    // Host-side tests
+    testImplementation deps.atsl.ext_junit
+    testImplementation deps.robolectric
+    // Espresso API running in Robolectric
+    testImplementation deps.espresso.core
+    testImplementation deps.espresso.contrib
+    testImplementation deps.espresso.intents
+    testImplementation deps.navigation.testing
+    testImplementation deps.truth
+
+}
